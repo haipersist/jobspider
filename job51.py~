@@ -1,0 +1,60 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+
+from jobspider import Job_Spider
+import re
+import time
+
+
+
+class Job51_Spider(Job_Spider):
+
+    def __init__(self,website):
+        super(Job51_Spider,self).__init__(website)
+
+
+    def parse(self,url):      
+        soup=self.get_html_content(url,self.headers)
+        result = []
+        for work in  soup.find('table',id="resultList").find_all('tr','tr0'):
+            try:
+                item = {}
+                item['link'] = work.find('td','td1').a['href']
+                item['title'] = work.find('td','td1').a.get_text()
+                item['company'] = work.find('td','td2').a.get_text()
+                item['jobintro'] = work.find('td','td2').a['href']
+                item['date'] = work.find('td','td4').get_text()
+                result.append(item)
+                #print item['title'],item['company']
+            except Exception,e:
+                print str(e)
+                continue
+        return result
+
+
+
+    def pages_parse(self,keyword):
+        for page in xrange(1,2):
+            self.url = "http://search.51job.com/jobsearch/search_result.php?fromJs=1&jobarea=010000,230300,230200&district=000000&funtype=0000&industrytype=00&issuedate=9&providesalary=99&keyword=%s&keywordtype=2&curr_page=%d&lang=c&stype=2&postchannel=0000&workyear=99&cotype=99&degreefrom=6&jobterm=0"%(keyword,page)
+            yield self.url
+            
+
+            
+
+
+
+
+
+
+
+if __name__=="__main__":
+
+    job51=Job51_Spider('51job')
+    print job51.site
+    print job51.headers
+    for url in job51.pages_parse('python'):
+        job51.store(job51.parse(url))
+
+
+
