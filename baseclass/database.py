@@ -61,7 +61,7 @@ class Database():
         self.con.commit()
     
         
-    def insert_list_dic(self, table, tar_data):
+    def insert_dic_by_list(self, table, tar_data):
         for data in tar_data:
             try:
                 self.insert_by_dic(table, data)        
