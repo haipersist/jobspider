@@ -24,7 +24,7 @@ class Spider():
     spiders = {
         'byr':BYR_Spider('byr','X-Requested-With','Host','Referer'),
         'lagou':LG_Spider('lagou'),
-        'zhilian':ZL_Spider('zhilian')
+        'zhilian':ZL_Spider('zhilian'),
         '51job':Job51_Spider('51job','Host','Cookie')
                }
     def __init__(self,keyword,store_type='mysql'):
@@ -81,7 +81,11 @@ def producer():
 
 if __name__=="__main__":
     spider = Spider('python')
-    spider.single_run('lagou')
+	for data in spider.get_single_data('lagou'):
+		for item in data:
+			print item['title'],item['salary']
+
+#spider.single_run('lagou')
 
     
 
