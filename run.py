@@ -56,40 +56,23 @@ class Spider():
         p.join()
 
 
-def crawl(website,keyword='python'):
-    spider = Job_Spider(keyword,website)
-    jobdata = []
-    for l in spider.parse():
-        for item in l:
-            jobdata.append(item)
-    lock.acquire()
-    spider.store_in_console(jobdata)
-    lock.release()
 
 
-def producer():
-    p = Pool()
-    sites = ['zhilian', 'job51','byr']
-#p.map(crawl,sites)
-    for website in sites:
-        p.apply_async(crawl,args=(website,))
-    p.close()
-    p.join()
-    print 'All processes Done!'
 
 
 
 if __name__=="__main__":
     spider = Spider('python')
-	for data in spider.get_single_data('lagou'):
-		for item in data:
-			print item['title'],item['salary']
+    spider.producer()
+    '''
+    for data in spider.get_single_data('lagou'):
+        for item in data:
+            print item['title'],item['salary'],item['company'],item['date']
 
-#spider.single_run('lagou')
+    #spider.single_run('lagou')
+    '''
 
     
-
-
 
 
 
