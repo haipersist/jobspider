@@ -32,8 +32,8 @@ class BYR_Spider(Base_Spider):
                 data.append(item)
         return [item for item in data if item]
 
-    def pages_parse(self,keyword,totalpages):
-        for page in xrange(1,totalpages):
+    def pages_parse(self,keyword):
+        for page in xrange(1,2):
             url = 'http://bbs.byr.cn/s/article?t1=%s&au=&b=JobInfo&_uid=guest&p=%d'%(keyword,page)
             data = self.parse(url)
             yield data
