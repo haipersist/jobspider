@@ -7,6 +7,10 @@ run spider in two different ways
 it can run in single spider ,selected from BYR,Lagou,Zhilian,51Job or
 run in multiprocessing
 
+
+Default,the data that spider crawls will be stored into json file ,of course,you can
+store into MySQL,excel or redis by setting store type.
+
 """
 
 
@@ -17,9 +21,8 @@ from byr import BYR_Spider
 from lagou import LG_Spider
 from zhilian import ZL_Spider
 from job51 import Job51_Spider
-#from utils.store_data import Job_Data
+from utils.store_data import Job_Data
 
-lock = Manager().Lock()
 
 
 class Spider():
@@ -30,7 +33,7 @@ class Spider():
         'zhilian':ZL_Spider('zhilian'),
         '51job':Job51_Spider('51job','Host','Cookie')
                }
-    def __init__(self,keyword,store_type='mysql'):
+    def __init__(self,keyword,store_type='json'):
         self.keyword = keyword
         self.store_type = store_type
 
@@ -65,15 +68,12 @@ class Spider():
 
 
 if __name__=="__main__":
+    lock = Manager().Lock()
     spider = Spider('python')
+    spider.single_run('lagou')
     #spider.producer()
-    for data in spider.get_single_data('51job'):
-        for item in data:
-            print item['title'],item['company'],item['link'],item['date']
 
-    #spider.single_run('lagou')
 
-    
 
 
 

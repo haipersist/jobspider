@@ -10,14 +10,14 @@ the data needed sotred is in format:[{},{},{}],we can store them in Mysql ,json 
 
 """
 
-from baseclass.database import Database
+#from baseclass.database import Database
 import json
-
+import os
 
 
 class Job_Data():
 
-    def __init__(self,store_type='Mysql'):
+    def __init__(self,store_type='json'):
         self.store_type = store_type
 
     def store(self,data):
@@ -35,9 +35,13 @@ class Job_Data():
         self.db.insert_dic_by_list('jobs',data)
 
     def store_to_json(self,data,filename='job.json'):
-        json_data = json.dumps(data)
-        with file('job.json','a+') as json_file:
-            json_file.write(json_data)
+        basepath = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
+        filepath = os.path.join(basepath,'results/%s'%filename)
+        for item in data:
+            json_data = json.dumps(item)
+            with file(filepath,'a+') as json_file:
+                json_file.write(json_data)
+                json_file.write('\n')
 
     def store_to_excel(self,data,filename='job.xlsx'):
         pass

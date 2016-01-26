@@ -16,9 +16,7 @@ Save in a hello.py:
 
     if __name__ == "__main__":
          spider = Spider('python')
-         for data in spider.get_single_data('lagou'):
-            for item in data:
-                print item['title'],item['salary'],item['company'],item['date']
+         spider.single_run('lagou')
 
 And Easy to Setup
 `````````````````
