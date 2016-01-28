@@ -96,7 +96,7 @@ if __name__=="__main__":
     lock = Manager().Lock()
     spider = Spider('python')
     spider.get_data('zhilian')
-    #producer(lock)
+    producer(lock)
 
 
 

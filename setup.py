@@ -49,7 +49,7 @@ setup(
     author_email='393993705@qq.com',
     description='A spider that crawls the job infos of famous website ',
     long_description=__doc__,
-    packages=['flask',],
+    packages=['jobspider',],
     include_package_data=True,
     zip_safe=False,
     platforms='any',
@@ -72,8 +72,8 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     include_package_data=True,
-    entry_points='''
-        [console_scripts]
-        jobspider=jobspider.spider:main
-    '''
+    #entry_points='''
+     #   [console_scripts]
+      #  jobspider=jobspider.spider:main
+    #'''
 )
