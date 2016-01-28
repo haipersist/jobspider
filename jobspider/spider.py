@@ -16,13 +16,14 @@ store into MySQL,excel or redis by setting store type.
 
 import time,timeit
 import datetime
+import os
 from multiprocessing import Pool,Manager
 from byr import BYR_Spider
 from lagou import LG_Spider
 from zhilian import ZL_Spider
 from job51 import Job51_Spider
 from utils.store_data import Job_Data
-
+from utils.setcolor import *
 
 
 class Spider():
@@ -46,21 +47,45 @@ class Spider():
         for data in self.get_single_data(spiname):
             db.store(data)
 
-    def multi_run(self,spiname):
-        db = Job_Data(self.store_type)
+    def print_output(self,spiname):
+        #In Linux,it will print data with colored
         for data in self.get_single_data(spiname):
-            lock.acquire()
-            db.store(data)
-            lock.release()
+            for item in data:
+                for key,value in item.items():
+                    if os.name == 'posix':
+                        print '{0}:{1}'.format(red(key),value),
+                    else:
+                        print '{0}:{1}'.format(key,value),
+                print '\n'
 
-    def producer(self):
-        p = Pool()
-        sites = ['zhilian', '51job','byr','lagou']
-        for site in sites:
-            p.apply_async(self.multi_run,args=(site,))
-        p.close()
-        p.join()
+    def get_data(self,spiname):
+        select = raw_input('you want put data into terminal or json(write terminal or json):')
+        if select == 'terminal':
+            self.print_output(spiname)
+        elif select == 'json':
+            self.single_run(spiname)
+        else:
+            print 'your input is incorrect,it must be terminal or json'
 
+    def multi_run(self,spiname):
+        print spiname
+        self.single_run(spiname)
+
+
+def crawl(spi,lock):
+    spider = Spider('python')
+    lock.acquire()
+    spider.multi_run(spi)
+    lock.release()
+
+
+def producer(lock):
+    p = Pool()
+    sites = ['zhilian', '51job','byr','lagou']
+    for site in sites:
+        p.apply_async(crawl,args=(site,lock))
+    p.close()
+    p.join()
 
 
 
@@ -70,8 +95,8 @@ class Spider():
 if __name__=="__main__":
     lock = Manager().Lock()
     spider = Spider('python')
-    spider.single_run('lagou')
-    #spider.producer()
+    spider.get_data('zhilian')
+    #producer(lock)
 
 
 
