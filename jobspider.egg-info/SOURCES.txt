@@ -14,6 +14,7 @@ jobspider.egg-info/requires.txt
 jobspider.egg-info/top_level.txt
 jobspider/baseclass/__init__.py
 jobspider/baseclass/base_spider.py
+jobspider/baseclass/config.py
 jobspider/baseclass/database.py
 jobspider/baseclass/excel.py
 jobspider/baseclass/myredis.py

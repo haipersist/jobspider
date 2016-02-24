@@ -12,8 +12,8 @@ from bs4 import BeautifulSoup
 from cStringIO import StringIO
 import cookielib
 import xml.etree.ElementTree as ET
-from jobspider.baseclass.utils.get_user_agent import get_user_agent
-
+from .utils.get_user_agent import get_user_agent
+from .config import ByrCfg,Job51Cfg,ZhiCfg,LgCfg
 
 class Base_Spider(object):
 
@@ -34,25 +34,17 @@ class Base_Spider(object):
         '''
         self.headers = {}
         self.headers.setdefault('User-Agent',get_user_agent())
-        self.cfg = ConfigParser.ConfigParser()
-        basepath = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
-        filepath = os.path.join(basepath,'webinfo.cfg')
-        self.cfg.read(filepath)
         for key in args[0]:
             self.get_cfg(self.headers,key)
 
 
     def get_cfg(self,field,key):
-        try:
-            if self.cfg.get(self.sitename, key):
-                if isinstance(field,dict):
-                    field[key] = self.cfg.get(self.sitename,key)
-                elif isinstance(field,basestring):
-                    return self.cfg.get(self.sitename,key)
-            else:
-                pass
-        except ConfigParser.NoOptionError:
-            print "%s not in %s" %(key,self.sitename)
+        SiteCfg = {'byr':ByrCfg(),'lagou':LgCfg(),'zhilian':ZhiCfg(),'51job':Job51Cfg()}
+        self.cfg = SiteCfg[self.sitename]
+        if key == 'X-Requested-With':
+            field[key] = getattr(self.cfg,'X_Requested_With')
+        else:
+            field[key] = getattr(self.cfg,key)
 
 
     def build_opener(self,save = False):

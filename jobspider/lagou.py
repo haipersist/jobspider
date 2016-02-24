@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 
-from jobspider.baseclass.base_spider import Base_Spider
+from baseclass.base_spider import Base_Spider
 
 
 

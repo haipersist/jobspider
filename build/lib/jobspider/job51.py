@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 
 
-from jobspider.baseclass.base_spider import Base_Spider
-from jobspider.baseclass.utils.setcolor import *
+from baseclass.base_spider import Base_Spider
+from baseclass.utils.setcolor import *
 
 
 class Job51_Spider(Base_Spider):

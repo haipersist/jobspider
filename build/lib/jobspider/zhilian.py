@@ -4,7 +4,7 @@ __author__ = 'WHB'
 
 
 
-from jobspider.baseclass.base_spider import Base_Spider
+from baseclass.base_spider import Base_Spider
 
 
 

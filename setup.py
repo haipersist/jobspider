@@ -42,7 +42,7 @@ from setuptools import setup
 
 setup(
     name='jobspider',
-    version='1.1.2',
+    version='2.0.2',
     url='https://github.com/haipersist/jobspider',
     license='BSD',
     author='Haibo Wang',
@@ -50,6 +50,8 @@ setup(
     description='A spider that crawls the job infos of famous website ',
     long_description=__doc__,
     packages=['jobspider','jobspider.baseclass','jobspider.baseclass.utils'],
+    package_data={'jobspider': ['*.cfg']},
+    package_dir={'jobspider': 'jobspider'},
     include_package_data=True,
     zip_safe=False,
     platforms='any',

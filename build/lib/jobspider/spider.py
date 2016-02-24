@@ -20,8 +20,8 @@ from byr import BYR_Spider
 from lagou import LG_Spider
 from zhilian import ZL_Spider
 from job51 import Job51_Spider
-from jobspider.baseclass.utils.store_data import Job_Data
-from jobspider.baseclass.utils.setcolor import *
+from baseclass.utils.store_data import Job_Data
+from baseclass.utils.setcolor import *
 
 
 class Spider():
@@ -77,7 +77,8 @@ def crawl(spi,lock):
     lock.release()
 
 
-def producer(lock):
+def producer():
+    lock = Manager().Lock()
     p = Pool()
     sites = ['zhilian', '51job','byr','lagou']
     for site in sites:
@@ -91,10 +92,9 @@ def producer(lock):
 
 
 if __name__=="__main__":
-    lock = Manager().Lock()
     #spider = Spider('python')
-    #spider.get_data('lagou')
-    producer(lock)
+    #spider.get_data('byr')
+    producer()
 
 
 
