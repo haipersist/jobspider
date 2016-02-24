@@ -36,8 +36,9 @@ class Job_Data():
 
     def store_to_json(self,data,filename='job.json'):
         basepath = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
-        filepath = os.path.join(basepath,'results/%s'%filename)
+        filepath = os.path.join(basepath,'%s'%filename)
         for item in data:
+            print item['title'],item['link']
             json_data = json.dumps(item)
             with file(filepath,'a+') as json_file:
                 json_file.write(json_data)
