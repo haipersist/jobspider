@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 """
@@ -50,14 +50,28 @@ class Spider():
         for data in self.get_single_data(spiname):
             for item in data:
                 for key,value in item.items():
+                    if not isinstance(key,unicode):
+                        key = key.encode('utf8')
+                    if not isinstance(value,unicode):
+                        value = value.encode('utf8')
                     if os.name == 'posix':
-                        print '{0}:{1}'.format(red(key),value),
+                        try:
+                            print '{0}:{1}'.format(red(key),value),
+                        except UnicodeEncodeError :
+                            key,value = key.encode('utf8'),value.encode('utf8')
+                            print '{0}:{1}'.format(key,value)
+                        else:
+                            print '{0}:{1}'.format(key,value),
                     else:
-                        print '{0}:{1}'.format(key,value),
+                        try:
+                            print '{0}:{1}'.format(key,value),
+                        except UnicodeEncodeError :
+                            key,value = key.encode('utf8'),value.encode('utf8')
+                            print '{0}:{1}'.format(key,value)
                 print '\n'
 
     def get_data(self,spiname):
-        select = raw_input('you want put data into terminal or json(write terminal or json):')
+        select = raw_input('you want put data into terminal or json(write ter or json):')
         if select == 'terminal':
             self.print_output(spiname)
         elif select == 'json':
@@ -95,10 +109,6 @@ if __name__=="__main__":
     #spider = Spider('python')
     #spider.get_data('byr')
     producer()
-
-sss
-
-
 
 
 

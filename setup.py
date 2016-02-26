@@ -42,7 +42,7 @@ from setuptools import setup
 
 setup(
     name='jobspider',
-    version='2.0.2',
+    version='2.0.3',
     url='https://github.com/haipersist/jobspider',
     license='BSD',
     author='Haibo Wang',
@@ -61,6 +61,7 @@ setup(
         'xlutils>=1.7.1',
         'xlrd>=0.9.4',
         'xlwt>=1.0.0',
+        'html5lib',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
