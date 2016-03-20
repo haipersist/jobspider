@@ -101,9 +101,6 @@ class Spider():
         else:
             print 'your input is incorrect,it must be terminal or json'
 
-    def multi_run(self,spiname):
-        print spiname
-        self.single_run(spiname)
 
 
 def crawl(spi,lock):
@@ -130,12 +127,6 @@ if __name__=="__main__":
     #producer()
 
 
-
-
-if __name__=="__main__":
-    #spider = Spider('python')
-    #spider.get_data('byr')
-    producer()
 
 
 
