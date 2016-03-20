@@ -36,8 +36,14 @@ class Job_Data():
 
     def store_to_json(self,data,filename='job.json'):
         basepath = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
-        filepath = os.path.join(basepath,'results/%s'%filename)
+        if os.name == 'nt':
+            filepath = os.path.join(basepath,'%s'%filename)
+            print 'json file is stored in C:\python'
+        else:
+            filepath = os.path.join('~/',filename)
+            print 'json file is stored in ~/ '
         for item in data:
+            #print item['title'],item['link']
             json_data = json.dumps(item)
             with file(filepath,'a+') as json_file:
                 json_file.write(json_data)

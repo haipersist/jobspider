@@ -13,7 +13,7 @@ from cStringIO import StringIO
 import cookielib
 import xml.etree.ElementTree as ET
 from .utils.get_user_agent import get_user_agent
-from .config import ByrCfg,Job51Cfg,ZhiCfg,LgCfg,DjCfg
+from .config import ByrCfg,Job51Cfg,ZhiCfg,LgCfg
 
 class Base_Spider(object):
 
@@ -39,7 +39,7 @@ class Base_Spider(object):
 
 
     def get_cfg(self,field,key):
-        SiteCfg = {'byr':ByrCfg(),'lagou':LgCfg(),'zhilian':ZhiCfg(),'51job':Job51Cfg(),'dajie':DjCfg()}
+        SiteCfg = {'byr':ByrCfg(),'lagou':LgCfg(),'zhilian':ZhiCfg(),'51job':Job51Cfg()}
         self.cfg = SiteCfg[self.sitename]
         if key == 'X-Requested-With':
             field[key] = getattr(self.cfg,'X_Requested_With')

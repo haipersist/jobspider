@@ -24,6 +24,7 @@ class DJ_Spider(Base_Spider):
             Cookie = get_cookie('http://so.dajie.com/job/search?keyword=python&f=nav')
             combin_cookie = ['='.join([key,value]) for key,value in Cookie]
             self.headers['Cookie'] = ';'.join(combin_cookie)
+            print self.headers['Cookie']
             json_str = self.get_content(url,url_type='json')
         metadata = json_str['data']['list']
         data=[]
@@ -42,12 +43,14 @@ class DJ_Spider(Base_Spider):
         return [item for item in data if item]
 
     def pages_parse(self,keyword):
-        for page in xrange(1,3):
+        for page in xrange(1,2):
             url = 'http://so.dajie.com/job/ajax/search/filter?jobsearch=0&pagereferer=blank&ajax=1&keyword=%s&page=%d'%(keyword,page)+'&order=0&from=user&salary=&recruitType=3%2C4&city=110000&positionIndustry=&positionFunction=&degree=&quality=&experience=&internshipDays=&partTimeCategory=&_CSRFToken='
             #print urllib2.urlopen(url).read()
             print url
             data = self.parse(url)
             yield data
+            #data = self.parse(url)
+            #yield data
 
 
 

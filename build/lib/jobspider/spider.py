@@ -20,10 +20,6 @@ from byr import BYR_Spider
 from lagou import LG_Spider
 from zhilian import ZL_Spider
 from job51 import Job51_Spider
-from dajie import DJ_Spider
-from utils.store_data import Job_Data
-from utils.get_cookies import get_cookie
-
 from baseclass.utils.store_data import Job_Data
 from baseclass.utils.setcolor import *
 
@@ -34,8 +30,7 @@ class Spider():
         'byr':BYR_Spider('byr','X-Requested-With','Host','Referer'),
         'lagou':LG_Spider('lagou'),
         'zhilian':ZL_Spider('zhilian'),
-        '51job':Job51_Spider('51job','Host','Cookie'),
-         'dajie':DJ_Spider('dajie','X-Requested-With','Host','Referer','Cookie')
+        '51job':Job51_Spider('51job','Host','Cookie')
                }
     def __init__(self,keyword,store_type='json'):
         self.keyword = keyword
@@ -43,29 +38,12 @@ class Spider():
 
     def get_single_data(self,spiname):
         self.spider = self.spiders[spiname]
-        data = self.spider.pages_parse(self.keyword)
-        return data
+        return self.spider.pages_parse(self.keyword)
 
     def single_run(self,spiname):
         db = Job_Data(self.store_type)
         for data in self.get_single_data(spiname):
             db.store(data)
-
-    def single_print(self,spiname):
-        for data in self.get_single_data(spiname):
-            for item in data:
-                for key,value in item.items():
-                    print "%s : %s" %(key,value),
-                print '\n'
-
-    def multi_run(self,spiname,lock):
-        db = Job_Data(self.store_type)
-        for data in self.get_single_data(spiname):
-            lock.acquire()
-            #print data
-            db.store(data)
-            lock.release()
-
 
     def print_output(self,spiname):
         #In Linux,it will print data with colored
@@ -123,11 +101,6 @@ def producer():
     p.join()
 
 
-if __name__=="__main__":
-    spider = Spider('python')
-    for item in  spider.get_single_data('dajie'):
-        print item
-    #producer()
 
 
 
