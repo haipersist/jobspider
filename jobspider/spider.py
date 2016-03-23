@@ -113,7 +113,7 @@ def crawl(spi,lock):
 def producer():
     lock = Manager().Lock()
     p = Pool()
-    sites = ['zhilian', '51job','byr','lagou']
+    sites = ['zhilian', '51job','byr','lagou','dajie']
     for site in sites:
         p.apply_async(crawl,args=(site,lock))
     p.close()
