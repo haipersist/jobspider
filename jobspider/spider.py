@@ -21,8 +21,6 @@ from lagou import LG_Spider
 from zhilian import ZL_Spider
 from job51 import Job51_Spider
 from dajie import DJ_Spider
-from utils.store_data import Job_Data
-from utils.get_cookies import get_cookie
 
 from baseclass.utils.store_data import Job_Data
 from baseclass.utils.setcolor import *
@@ -37,6 +35,7 @@ class Spider():
         '51job':Job51_Spider('51job','Host','Cookie'),
          'dajie':DJ_Spider('dajie','X-Requested-With','Host','Referer','Cookie')
                }
+
     def __init__(self,keyword,store_type='json'):
         self.keyword = keyword
         self.store_type = store_type
@@ -58,14 +57,9 @@ class Spider():
                     print "%s : %s" %(key,value),
                 print '\n'
 
-    def multi_run(self,spiname,lock):
-        db = Job_Data(self.store_type)
-        for data in self.get_single_data(spiname):
-            lock.acquire()
-            #print data
-            db.store(data)
-            lock.release()
-
+    def multi_run(self,spiname):
+        print spiname
+        self.single_run(spiname)
 
     def print_output(self,spiname):
         #In Linux,it will print data with colored
@@ -103,28 +97,36 @@ class Spider():
 
 
 
-def crawl(spi,lock):
-    spider = Spider('python')
+def crawl(spi,lock,store_type):
+    spider = Spider('python',store_type)
+    #when storing data to json or database,should set lock in order to protecting the data
     lock.acquire()
     spider.multi_run(spi)
     lock.release()
 
 
-def producer():
+def producer(store_type='json'):
+    """
+    In this spider,we can use multiprocessing to crawl job data from
+    several different website.
+    It can save a lot time by using multiprocessing.and this usage is
+    very simple,efficient and pythonic.
+
+    """
     lock = Manager().Lock()
     p = Pool()
     sites = ['zhilian', '51job','byr','lagou','dajie']
     for site in sites:
-        p.apply_async(crawl,args=(site,lock))
+        p.apply_async(crawl,args=(site,lock,store_type))
     p.close()
     p.join()
 
 
 if __name__=="__main__":
-    spider = Spider('python')
-    for item in  spider.get_single_data('dajie'):
-        print item
-    #producer()
+    #spider = Spider('python')
+    #for item in  spider.get_single_data('51job'):
+     #   print item
+    producer()
 
 
 

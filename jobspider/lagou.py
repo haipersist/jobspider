@@ -20,6 +20,7 @@ class LG_Spider(Base_Spider):
         if hasattr(self,'total_pages'):
             self.total_pages = content["totalPageCount"]
         data_list = content['result']
+        result = []
         for data in data_list:
             item = {}
             item['website'] = 'lagou'
@@ -29,14 +30,15 @@ class LG_Spider(Base_Spider):
             item['company'] = data['companyName']
             item['salary'] = data['salary']
             item['date'] = data['createTime']
-            yield item
+            result.append(item)
+        return result
 
 
 
 		
 
     def pages_parse(self,keyword):
-        for page in xrange(1,3):
+        for page in xrange(1,2):
             if not isinstance(keyword,unicode):
                 keyword = keyword.encode('utf8')
             url = 'http://www.lagou.com/jobs/positionAjax.json?px=new&gx=%E5%85%A8%E8%81%8C&city=%E5%8C%97%E4%BA%AC&first=true&'+'kd=%s&pn=%d'%(keyword,page)
@@ -46,5 +48,9 @@ class LG_Spider(Base_Spider):
 
 
 
+if __name__ == "__main__":
+    lg = LG_Spider('lagou')
+    for item in lg.pages_parse('python'):
+        print item
 
 

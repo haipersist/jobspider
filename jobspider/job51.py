@@ -28,6 +28,7 @@ class Job51_Spider(Base_Spider):
         except AttributeError:
             print red('cookie may be invalid,pls check the cookie of webinfo.cfg')
         #print resultlist
+        data = []
         for el in resultlist:
             item = {}
             #print el
@@ -37,7 +38,8 @@ class Job51_Spider(Base_Spider):
             item['homepage'] = el.find('span','t2').find('a')['href']
             item['salary'] = el.find('span','t4').text
             item['date'] = el.find('span','t5').text
-            yield item
+            data.append(item)
+        return data
 
     def pages_parse(self,keyword):
         for page in xrange(1,2):
