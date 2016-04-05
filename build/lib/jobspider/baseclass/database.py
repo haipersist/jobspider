@@ -8,9 +8,9 @@ class Database():
 
                    'Job': {
                         'host': '127.0.0.1',
-                        'user': 'admin',
-                        'passwd': 'admin',
-                        'db': 'jobs',
+                        'user': 'root',
+                        'passwd': '320623',
+                        'db': 'Job',
                         'charset': 'utf8'},
                   'local':{
                         'host':'127.0.0.1',

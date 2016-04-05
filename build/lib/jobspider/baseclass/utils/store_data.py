@@ -13,7 +13,7 @@ the data needed sotred is in format:[{},{},{}],we can store them in Mysql ,json 
 #from baseclass.database import Database
 import json
 import os
-from  ..database import Database
+
 
 class Job_Data():
 

@@ -25,4 +25,3 @@ class DjCfg():
     X_Requested_With = 'XMLHttpRequest'
     Cookie = 'SO_COOKIE=0118rYGAq6mYqoQMbSISR/nV4+crW0dVqftsEZTM1cHnN93KRvgKDOgbfWMP3Sw+KrUUUvoQEspFD+6H9APzjOnTpIpYG/BZswUX; DJ_UVID=MTQ1ODQ0NDM5OTgzNzU3MjUz; __login_tips=1; DJ_RF=empty; DJ_EU=http%3A%2F%2Fso.dajie.com%2Fjob%2Fsearch%3Fkeyword%3Dpython%26f%3Dnav'
     Referer = 'http://so.dajie.com/job/search?keyword=python&f=nav'
-

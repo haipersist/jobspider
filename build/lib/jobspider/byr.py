@@ -26,7 +26,7 @@ class BYR_Spider(Base_Spider):
             for td in tr.find_all('td')[0:-2]:
                 if td['class'][0] in title.keys():
                     if td['class'][0] == 'title_9':
-                        item['link'] = 'http://bbs.byr.cn'+td.a['href']
+                        item['link'] = 'www.bbs.byr.cn'+td.a['href']
                     item[title[td['class'][0]]] = td.get_text()
                 item['website'] = 'byr'
                 data.append(item)

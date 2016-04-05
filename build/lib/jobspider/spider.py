@@ -98,7 +98,6 @@ class Spider():
 
 
 def crawl(spi,lock,store_type):
-    #get the spider object,when storing data,it will
     spider = Spider('python',store_type)
     #when storing data to json or database,should set lock in order to protecting the data
     lock.acquire()
@@ -112,7 +111,6 @@ def producer(store_type='json'):
     several different website.
     It can save a lot time by using multiprocessing.and this usage is
     very simple,efficient and pythonic.
-    :param:store_type, the format you store the data ,it can be MySQL,json file,excel and redis.
 
     """
     lock = Manager().Lock()
@@ -128,7 +126,7 @@ if __name__=="__main__":
     #spider = Spider('python')
     #for item in  spider.get_single_data('51job'):
      #   print item
-    producer(store_type='MySQL')
+    producer()
 
 
 
