@@ -48,7 +48,7 @@ class Spider():
     def single_run(self,spiname):
         db = Job_Data(self.store_type)
         for data in self.get_single_data(spiname):
-            db.store(data)
+			db.store(data)
 
     def single_print(self,spiname):
         for data in self.get_single_data(spiname):
@@ -125,10 +125,9 @@ def producer(store_type='json'):
 
 
 if __name__=="__main__":
-    #spider = Spider('python')
-    #for item in  spider.get_single_data('51job'):
-     #   print item
-    producer(store_type='MySQL')
+	#spider = Spider('python',store_type='MySQL')
+	#spider.single_run("dajie")
+	producer(store_type='MySQL')
 
 
 

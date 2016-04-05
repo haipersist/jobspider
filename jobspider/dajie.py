@@ -30,12 +30,13 @@ class DJ_Spider(Base_Spider):
         for md in metadata:
             item = {}
             try:
-                item[u'链接'] = md['liHref']
-                item[u'主题'] = md['jobName']
-                item[u'公司'] = md['compName']
-                item[u'日期'] = md['time']
-                item[u'介绍'] = ':'.join([u'月薪',md['salary']])
-                item[u'主页'] = md['compHref']
+                item['website'] = 'dajie'
+                item['link'] = md['liHref']
+                item['title'] = md['jobName']
+                item['company'] = md['compName']
+                item['date'] = md['time']
+                #item['intro'] = ':'.join([u'月薪',md['salary']])
+                item['homepage'] = md['compHref']
             except KeyError,e:
                 print str(e)
             data.append(item)

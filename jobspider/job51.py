@@ -32,6 +32,7 @@ class Job51_Spider(Base_Spider):
         for el in resultlist:
             item = {}
             #print el
+            item['website'] = '51job'
             item['title']=el.find('p','t1').find('a').text
             item['link'] = el.find('p','t1').find('a')['href']
             item['company'] = el.find('span','t2').find('a').text

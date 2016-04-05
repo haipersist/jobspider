@@ -7,10 +7,10 @@ class Database():
     config={
 
                    'Job': {
-                        'host': '127.0.0.1',
+                        'host': 'localhost',
                         'user': 'admin',
                         'passwd': 'admin',
-                        'db': 'jobs',
+                        'db': 'Job',
                         'charset': 'utf8'},
                   'local':{
                         'host':'127.0.0.1',

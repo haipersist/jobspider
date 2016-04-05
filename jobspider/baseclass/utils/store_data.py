@@ -13,6 +13,7 @@ the data needed sotred is in format:[{},{},{}],we can store them in Mysql ,json 
 #from baseclass.database import Database
 import json
 import os
+from datetime import datetime
 from  ..database import Database
 
 class Job_Data():
@@ -32,6 +33,8 @@ class Job_Data():
 
     def store_to_mysql(self,data):
         self.db = Database('Job')
+        for item in data:
+            item['create_day'] = datetime.today().strftime("%Y-%m-%d")
         self.db.insert_dic_by_list('jobs',data)
 
     def store_to_json(self,data,filename='job.json'):
