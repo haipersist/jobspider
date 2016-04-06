@@ -21,6 +21,7 @@ class Job_Data():
     def __init__(self,store_type='json'):
         self.store_type = store_type
 
+
     def store(self,data):
         if self.store_type == 'MySQL':
             self.store_to_mysql(data)

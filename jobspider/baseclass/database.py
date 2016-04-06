@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*-coding:utf-8 -*-
 import MySQLdb
+from .utils.joblog import MyLogger
 
 class Database():
     
@@ -66,8 +67,9 @@ class Database():
             try:
                 self.insert_by_dic(table, data)        
             except Exception,e:
-                    print str(e),data
-                    continue
+                logger = MyLogger('jobspider').logger
+                logger.error(str(e))
+                continue
                 
     def update_(self,table,key,value,ref_key,ref_value):
         sql = 'update %s set %s="%s" where %s="%s"'\
