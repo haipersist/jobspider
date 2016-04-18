@@ -22,5 +22,6 @@ jobspider/baseclass/send_email.py
 jobspider/baseclass/utils/__init__.py
 jobspider/baseclass/utils/get_cookies.py
 jobspider/baseclass/utils/get_user_agent.py
+jobspider/baseclass/utils/joblog.py
 jobspider/baseclass/utils/setcolor.py
 jobspider/baseclass/utils/store_data.py

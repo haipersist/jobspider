@@ -12,13 +12,15 @@ this module is very simple to use.for excample:
  from jobspider.spider import producer
 
  if __name__ == "__main__":
+
     producer()
     # run single spider
     spider = Spider('python')
-    for item in  spider.get_single_data('51job'):
-        print item
+	spider.single_run("lagou")
 
- after the programm ends,the data has been stored in json file. of course,you can store data to other files or databases,
+
+
+ By default,after the programm ends,the data has been stored in json file. of course,you can store data to other files or databases,
  but you must has created corresponding table.you can add code in baseclass.utils.store_data py file.
 
 

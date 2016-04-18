@@ -12,7 +12,7 @@ Save in a hello.py:
 .. code:: python
 
     from jobpiser import Spider
-    spider = Spider()
+
 
     if __name__ == "__main__":
          spider = Spider('python')
@@ -42,7 +42,7 @@ from setuptools import setup
 
 setup(
     name='jobspider',
-    version='2.3.1',
+    version='2.3.3',
     url='https://github.com/haipersist/jobspider',
     license='BSD',
     author='Haibo Wang',
