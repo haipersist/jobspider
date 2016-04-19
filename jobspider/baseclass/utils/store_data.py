@@ -50,7 +50,7 @@ class Job_Data():
         for item in data:
             #print item['title'],item['link']
             json_data = json.dumps(item)
-            with file(filepath,'w') as json_file:
+            with file(filepath,'a+') as json_file:
                 json_file.write(json_data)
                 json_file.write('\n')
 
