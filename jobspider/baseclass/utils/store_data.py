@@ -43,7 +43,7 @@ class Job_Data():
         basepath = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
         if os.name == 'nt':
             filepath = os.path.join(basepath,'%s'%filename)
-            print 'json file is stored in C:\python'
+            print 'json file is stored in %s' % filepath
         else:
             filepath = os.path.join('/tmp',filename)
             print 'json file is stored in %s ' % filepath

@@ -42,7 +42,7 @@ from setuptools import setup
 
 setup(
     name='jobspider',
-    version='2.3.3',
+    version='2.3.4',
     url='https://github.com/haipersist/jobspider',
     license='BSD',
     author='Haibo Wang',
