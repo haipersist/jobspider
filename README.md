@@ -30,7 +30,7 @@ from jobspider.spider import producer
  If you wanna to store data to MySQL.you should add user into MySQL.user whose username is admin,password:admin
  of course ,you should create table by yourself,the field includes:int id,title varchar,company varchar,linke varchar,
  salary,create_day,date.
- 
+
 
 
 
