@@ -26,7 +26,7 @@ class SendMail():
         self._send_server = os.environ.get('MAIL_SERVER')
         print self._send_server
         Jobspider = commands.getoutput('echo $Jobspider')
-        self._cfg_path = '/'.join([Jobspider,'config/sendemail.cfg'])
+        self._cfg_path = '/'.join([Jobspider,'config/send_email.cfg'])
         self._smtp = smtplib.SMTP(self._send_server)
         self.set_config()
         self.user = os.environ.get('MAIL_SENDER')
@@ -70,7 +70,7 @@ class SendMail():
 
 def test():
     S_mail = SendMail('Job')
-    S_mail.send_email(msghtml='<h1>test</h1>')
+    S_mail.send_email(msghtml='test')
 
 
 

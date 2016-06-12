@@ -3,7 +3,7 @@
 
 import urllib2
 from baseclass.base_spider import Base_Spider
-
+import requests
 
 
 
@@ -11,6 +11,16 @@ class BYR_Spider(Base_Spider):
 
     def __init__(self,website,*args):
         super(BYR_Spider,self).__init__(website,args)
+
+    
+    def byr_login(self):
+        posturl = 'https://bbs.byr.cn/user/ajax_login.json'
+        postdata = {'id':'liangting','passwd':'001108'}
+        #print self.login(posturl,postdata)
+        self.session = requests.Session()
+        s = self.session.post(posturl,postdata,headers=self.headers)
+        print self.session.get('https://bbs.byr.cn/#!s/article?t1=python&au=&b=JobInfo').content
+        #print self.parse('https://bbs.byr.cn/#!s/article?t1=python&au=&b=JobInfo')
 
 
     def parse(self,url):
@@ -34,13 +44,18 @@ class BYR_Spider(Base_Spider):
 
     def pages_parse(self,keyword):
         for page in xrange(1,2):
-            url = 'http://bbs.byr.cn/s/article?t1=%s&au=&b=JobInfo&_uid=guest&p=%d'%(keyword,page)
+            url = 'https://bbs.byr.cn/s/article?t1=%s&au=&b=JobInfo&_uid=liangting&p=%d'%(keyword,page)
             data = self.parse(url)
             yield data
 
 
 
 
+
+
+if __name__ == "__main__":
+    byr = BYR_Spider('byr','X-Requested-With','Host','Referer','Cookie')
+    print byr.parse('https://bbs.byr.cn/s/article?t1=python&au=&b=JobInfo&_uid=liangting')
 
 
 

@@ -29,7 +29,7 @@ from baseclass.utils.setcolor import *
 class Spider():
 
     spiders = {
-        'byr':BYR_Spider('byr','X-Requested-With','Host','Referer'),
+        'byr':BYR_Spider('byr','X-Requested-With','Host','Referer','Cookie'),
         'lagou':LG_Spider('lagou'),
         'zhilian':ZL_Spider('zhilian'),
         '51job':Job51_Spider('51job','Host','Cookie'),
@@ -128,9 +128,9 @@ def producer(store_type='json'):
 
 
 if __name__=="__main__":
-	spider = Spider('python')
-	spider.single_run("lagou")
-	#producer(store_type='MySQL')
+    #spider = Spider('python',store_type='redis')
+    #spider.single_run("lagou")
+    producer(store_type='MySQL')
 
 
 

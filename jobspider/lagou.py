@@ -16,9 +16,10 @@ class LG_Spider(Base_Spider):
 
     def parse(self,url):
         response = self.get_content(url,url_type='json')
-        content = response['content']
+        content = response['content']["positionResult"]
         if hasattr(self,'total_pages'):
             self.total_pages = content["totalPageCount"]
+        print content
         data_list = content['result']
         result = []
         for data in data_list:
@@ -42,7 +43,9 @@ class LG_Spider(Base_Spider):
             if not isinstance(keyword,unicode):
                 keyword = keyword.encode('utf8')
             url = 'http://www.lagou.com/jobs/positionAjax.json?px=new&gx=%E5%85%A8%E8%81%8C&city=%E5%8C%97%E4%BA%AC&first=true&'+'kd=%s&pn=%d'%(keyword,page)
+            print url
             data = self.parse(url)
+            print url
             yield data
 
 

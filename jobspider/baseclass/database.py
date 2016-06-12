@@ -9,9 +9,9 @@ class Database():
 
                    'Job': {
                         'host': 'localhost',
-                        'user': 'admin',
-                        'passwd': 'admin',
-                        'db': 'Job',
+                        'user': 'root',
+                        'passwd': '320623',
+                        'db': 'app_hbnnlove',
                         'charset': 'utf8'},
                   'local':{
                         'host':'127.0.0.1',

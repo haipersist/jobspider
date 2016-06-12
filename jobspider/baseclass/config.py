@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 class ByrCfg():
-    Host = 'www.bbs.byr.cn'
-    Referer = 'www.bbs.byr.cn'
+    Host = 'bbs.byr.cn'
+    Referer = 'https://bbs.byr.cn/'
     X_Requested_With = 'XMLHttpRequest'
+    Cookie = 'Hm_lvt_38b0e830a659ea9a05888b924f641842=1464161381; Hm_lpvt_38b0e830a659ea9a05888b924f641842=1464164563; login-user=liangting; nforum[XWJOKE]=hoho; left-index=0001000000; nforum[BMODE]=2; nforum[UTMPUSERID]=liangting; nforum[UTMPKEY]=44364078; nforum[UTMPNUM]=2721; nforum[PASSWORD]=yqMebwUM0ULVnbLwN4vang%3D%3D'
 
 
 class Job51Cfg():

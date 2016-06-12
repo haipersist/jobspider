@@ -15,6 +15,9 @@ import json
 import os
 from datetime import datetime,date
 from  ..database import Database
+from ..myredis import PyRedis
+
+
 
 class Job_Data():
 
@@ -57,8 +60,15 @@ class Job_Data():
     def store_to_excel(self,data,filename='job.xlsx'):
         pass
 
-    def store_to_redis(self,data,keyname='job'):
-        pass
+    def store_to_redis(self,data):
+        r = PyRedis('local')
+        keys=['51job','dajie','zhilian','byr','lagou']
+        for key in keys:
+            data_to_store = [item for item in data if item['website']==key]
+            if data_to_store:
+                r.set_hash_field('Job',key,data_to_store)
+
+        
 
     
 

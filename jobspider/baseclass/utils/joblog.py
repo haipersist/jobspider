@@ -17,7 +17,7 @@ NOTSET	    0
 
 import logging
 import os
-
+from datetime import date
 
 
 class MyLogger():
@@ -42,10 +42,11 @@ class MyLogger():
 
     @property
     def file_handler(self):
+        today = date.today().strftime("%Y-%m-%d")
         formater = logging.Formatter(
             '%(asctime)s %(levelname)s %(message)s in %(filename)s %(levelno)s'
         )
-        com_handler = logging.FileHandler('s.log')
+        com_handler = logging.FileHandler('/tmp/job-%s.log'%today)
         com_handler.setLevel(logging.ERROR)
         com_handler.setFormatter(formater)
         return com_handler
