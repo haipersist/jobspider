@@ -15,7 +15,7 @@ class BYR_Spider(Base_Spider):
     
     def byr_login(self):
         posturl = 'https://bbs.byr.cn/user/ajax_login.json'
-        postdata = {'id':'liangting','passwd':'001108'}
+        postdata = {'id':'liangting','passwd':'***'}
         #print self.login(posturl,postdata)
         self.session = requests.Session()
         s = self.session.post(posturl,postdata,headers=self.headers)
